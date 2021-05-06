@@ -1,0 +1,30 @@
+<div *ngIf="isDataAvailable">
+    <div class="container"> 
+        <div class="container">        
+            <div class="post-list-header">
+                <h3>Posts</h3>
+                <div class="container">
+                    <button *ngIf="IsCreateAvailable()" (click)="createPost()" class="btn btn-dark">Create post</button>
+                </div>
+            </div>
+            <div class="container">
+                <input class="form-control-searchbox" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" 
+                placeholder="&#171; Search">
+                <mat-card *ngFor="let post of posts | filter:searchText" class="post-card">
+                    <mat-card-header>
+                        <mat-card-title>{{post.title}}</mat-card-title>
+                        <mat-card-subtitle>{{post.createdAt | date:'fullDate'}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{post.body}}</p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button (click)="details(post.id)" class="btn btn-info">Details</button>
+                        <button  *ngIf="IsUpdateAvailable()" (click)="update(post.id)" class="btn btn-dark">Update</button>
+                        <button *ngIf="IsDeleteAvailable()" (click)="delete(post.id)" class="btn btn-dark">Delete</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

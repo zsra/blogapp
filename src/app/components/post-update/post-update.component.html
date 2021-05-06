@@ -1,0 +1,46 @@
+<div *ngIf="isDataAvailable">
+    <div class="container" *ngIf="userRole()">
+        <div class="container">
+            <h2>Create</h2>
+        </div>
+        <div class="container">
+            <button (click)="goBack()" class="btn btn-dark">Back</button>
+            <form (ngSubmit)="onPostSubmit()" #form="ngForm" class="form">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" required [(ngModel)]="post.Title" name="title" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="body">Body</label>
+                    <input type="text" class="form-control" id="body" required [(ngModel)]="post.Body" name="body" placeholder="Body">
+                </div>
+                <div class="form-group">
+                    <button (click)="newCategory()" class="btn btn-success">Add new category</button>
+                    <label for="category">Category</label>
+                    <select name="category" class="form-control form-control-sm" [(ngModel)]="selectedOption">
+                        <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+                   </select>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+        <div class="container" *ngIf="isNewCategory">
+            <form (ngSubmit)="onCategorySubmit()" #form="ngForm" class="form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" required [(ngModel)]="createdCategory.Name" name="name" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="ageGroup">Age group</label>
+                    <select class="form-control" id="ageGroup" multiple required [(ngModel)]="createdCategory.AgeGroups" name="ageGroup" placeholder="Agegroup">
+                        <option value="ADULT">adult</option>
+                        <option value="YOUNG">young</option>
+                        <option value="ELDER">elder</option>
+                    </select>
+                    <button (click)="newCategory()" class="btn btn-success">Add new category</button>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

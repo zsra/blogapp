@@ -1,0 +1,36 @@
+<div *ngIf="isDataAvailable">
+    <div class="container">
+        <div class="container">
+            <h2>Create</h2>
+        </div>
+        <div class="container">
+            <form (ngSubmit)="onUserSubmit()" #form="ngForm" class="form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" required [(ngModel)]="register.Username" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" required [(ngModel)]="register.Password" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="firstname">Firstname</label>
+                    <input type="text" class="form-control" id="firstname" required [(ngModel)]="register.FirstName" name="firstname" placeholder="Firstname">
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Lastname</label>
+                    <input type="text" class="form-control" id="lastname" required [(ngModel)]="register.LastName" name="lastname" placeholder="Lastname">
+                </div>
+                <div class="form-group">
+                    <label for="ageGroup">Age group</label>
+                    <select class="form-control" id="ageGroup" required [(ngModel)]="register.AgeGroup" name="ageGroup" placeholder="Agegroup">
+                        <option value="ADULT">adult</option>
+                        <option value="YOUNG">young</option>
+                        <option value="ELDER">elder</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

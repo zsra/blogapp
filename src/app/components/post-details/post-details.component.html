@@ -1,0 +1,51 @@
+<div *ngIf="isDataAvailable">
+    <div class="container" >
+        <mat-card *ngIf="post">
+          <mat-card-header>
+            <mat-card-title>{{ post["title"] }}</mat-card-title>
+            <mat-card-subtitle>{{post["createdAt"] | date:'fullDate'}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{post["body"]}}</p>
+          </mat-card-content>
+        </mat-card> 
+        <mat-card class="comment-container">
+          <mat-card class="container">
+            <textarea [(ngModel)]="commentText"></textarea>
+            <button (click)="newComment()" class="btn btn-dark">Comment</button>
+          </mat-card>
+          <h3><b>Comments</b></h3>
+            <ul>
+              <ng-container
+                *ngTemplateOutlet="recursiveListTmpl; context:{ list: comments }"
+              ></ng-container>
+            </ul>
+            
+            <ng-template #recursiveListTmpl let-list="list">
+              <li *ngFor="let item of list">
+                <mat-card class="comment-card">
+                  <mat-card-header>
+                    <mat-card-title>{{item["authorName"]}}</mat-card-title>
+                    <mat-card-subtitle>{{item["createdAt"] | date:'fullDate'}}</mat-card-subtitle>
+                  </mat-card-header>
+                
+                <mat-card-content>
+                  <p>{{item["body"]}}</p>
+                </mat-card-content>
+                
+                <textarea [(ngModel)]="commentText"></textarea>
+                <mat-card-actions>
+                  <button (click)="addComment(item)" class="btn btn-dark">Add comment</button>
+                </mat-card-actions>
+              </mat-card>
+
+                <ul *ngIf="item.comments.length > 0">
+                  <ng-container
+                    *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.comments }"
+                  ></ng-container>
+                </ul>
+              </li>
+            </ng-template>
+        </mat-card>
+    </div>
+</div>
